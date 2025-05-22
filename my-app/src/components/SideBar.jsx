@@ -21,15 +21,14 @@ export default function Sidebar() {
 
   return (
     <>
-      <Example></Example>
       <div
-        className={`fixed top-0 flex flex-col h-screen bg-gray-800 text-white ${
-          collapsed ? "w-20" : "w-54"
+        className={`flex flex-col h-screen bg-gray-800 text-white ${
+          collapsed ? "w-20" : "w-64"
         }`}
       >
-        <div className="flex items-center justify-between p-4">
+        <div className="flex items-center justify-between p-4 relative">
           <h1
-            className={`text-3xl font-bold border-b-1 border-b-blue-800 ${
+            className={`text-3xl font-bold border-b-3 border-b-blue-800 ${
               collapsed ? "opacity-0" : "opacity-100"
             }`}
           >
@@ -39,7 +38,7 @@ export default function Sidebar() {
           <button
             onClick={() => setCollapsed(!collapsed)}
             className={`text-gray-400 hover:text-white ${
-              collapsed ? "fixed left-auto ml-2" : ""
+              collapsed ? "absolute left-auto ml-2" : ""
             }`}
           >
             {collapsed ? (
@@ -49,7 +48,7 @@ export default function Sidebar() {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="size-6"
+                className="size-6 hover:text-blue-400"
               >
                 <path
                   strokeLinecap="round"
@@ -64,7 +63,7 @@ export default function Sidebar() {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="size-6"
+                className="size-6 hover:text-blue-400"
               >
                 <path
                   strokeLinecap="round"
@@ -80,7 +79,7 @@ export default function Sidebar() {
             <a
               key={item.name}
               href={item.href}
-              className="flex items-center px-2 py-2 text-sm font-medium rounded-md hover:bg-gray-700"
+              className="flex items-center px-2 py-2 text-sm font-medium rounded-md hover:bg-blue-400"
             >
               <item.icon
                 className={`${collapsed ? "w-6 h-6" : "w-6 h-6 mr-3"}`}

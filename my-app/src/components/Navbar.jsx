@@ -20,7 +20,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Example() {
+export default function Navbar() {
   return (
     <Disclosure as="nav" className=" bg-gray-800">
       <div className="mx-auto sm:px-6 md:px-8 lg:px-8">

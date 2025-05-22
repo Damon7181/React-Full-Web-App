@@ -1,6 +1,8 @@
 import React from "react";
+import Navbar from "./Navbar";
+import Sidebar from "./SideBar";
 
-const FeaturesSection = () => {
+const Dashboard = () => {
   const features = [
     {
       title: "Shooting Stars",
@@ -25,70 +27,81 @@ const FeaturesSection = () => {
         </>
       ),
     },
-    {
-      title: "Melanchole",
-      icon: (
-        <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1zM4 22v-7" />
-      ),
-    },
-    {
-      title: "Bunker",
-      icon: <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />,
-    },
-    {
-      title: "Ramona Falls",
-      icon: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />,
-    },
+    // {
+    //   title: "Melanchole",
+    //   icon: (
+    //     <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1zM4 22v-7" />
+    //   ),
+    // },
+    // {
+    //   title: "Bunker",
+    //   icon: <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />,
+    // },
+    // {
+    //   title: "Ramona Falls",
+    //   icon: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />,
+    // },
   ];
 
   return (
-    <div className="container mx-55">
-      <section className="text-gray-600 body-font">
-        <div className="container px-5 py-24 mx-auto">
-          {/* <div className="flex flex-wrap w-full mb-20 flex-col items-center text-center">
-            <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">
-              Pitchfork Kickstarter Taxidermy
-            </h1>
-            <p className="lg:w-1/2 w-full leading-relaxed text-gray-500">
-              Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical
-              gentrify, subway tile poke farm-to-table.
-            </p>
-          </div> */}
-          <div className="flex flex-wrap -m-4">
-            {features.map((feature, index) => (
-              <div key={index} className="xl:w-1/3 md:w-1/2 p-4">
-                <div className="border border-gray-200 p-6 rounded-lg">
-                  <div className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
-                    <svg
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      className="w-6 h-6"
-                      viewBox="0 0 24 24"
-                    >
-                      {feature.icon}
-                    </svg>
-                  </div>
-                  <h2 className="text-lg text-gray-900 font-medium title-font mb-2">
-                    {feature.title}
-                  </h2>
-                  <p className="leading-relaxed text-base">
-                    Fingerstache flexitarian street art 8-bit waist co, subway
-                    tile poke farm.
-                  </p>
-                </div>
+    <div className="flex h-screen overflow-hidden">
+      <Sidebar />
+
+      <div className="flex flex-col w-full">
+        <Navbar />
+
+        <main className="flex flex-1 flex-grow overflow-y-auto   p-4">
+          <section className="text-gray-600 body-font w-full">
+            <div className="container px-5 mx-auto w-full">
+              <div>
+                <h1 className="text-4xl text-zinc-950 font-bold">
+                  Welcome back, User!
+                </h1>
+                <p>
+                  &nbsp;Here's a{" "}
+                  <span className="text-blue-400 font-bold">
+                    <em> quick summary</em>
+                  </span>{" "}
+                  of your store's activity.
+                </p>
               </div>
-            ))}
-          </div>
-          {/* <button className="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+              <div className="flex flex-wrap flex-grow ">
+                {features.map((feature, index) => (
+                  <div key={index} className="xl:w-1/3 md:w-1/2 p-4 ">
+                    <div className=" border border-gray-400 p-6 rounded-lg hover:shadow shadow-blue-500 group">
+                      <div className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4 group-hover:bg-blue-900 group-hover:text-amber-50">
+                        <svg
+                          fill="none"
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          className="w-6 h-6"
+                          viewBox="0 0 24 24"
+                        >
+                          {feature.icon}
+                        </svg>
+                      </div>
+                      <h2 className="text-lg text-gray-900 font-medium title-font mb-2 group-hover:text-blue-900">
+                        {feature.title}
+                      </h2>
+                      <p className="leading-relaxed text-base group-hover:text-blue-950">
+                        Fingerstache flexitarian street art 8-bit waist co,
+                        subway tile poke farm.
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              {/* <button className="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
             Button
           </button> */}
-        </div>
-      </section>
+            </div>
+          </section>
+        </main>
+      </div>
     </div>
   );
 };
 
-export default FeaturesSection;
+export default Dashboard;
