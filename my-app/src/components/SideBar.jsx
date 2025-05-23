@@ -9,11 +9,11 @@ import {
 } from "@heroicons/react/24/outline";
 import Example from "./Navbar";
 const navigation = [
-  { name: "Dashnoard", href: "#", icon: Squares2X2Icon },
-  { name: "Products", href: "#", icon: CubeIcon },
-  { name: "Category", href: "#", icon: FolderIcon },
-  { name: "Brands", href: "#", icon: TagIcon },
-  { name: "Logout", href: "#", icon: ArrowRightStartOnRectangleIcon },
+  { name: "Dashboard", href: "/", icon: Squares2X2Icon },
+  { name: "Products", href: "/Products", icon: CubeIcon },
+  { name: "Categories", href: "/Categories", icon: FolderIcon },
+  { name: "Brands", href: "/Brands", icon: TagIcon },
+  { name: "Logout", href: "/Login", icon: ArrowRightStartOnRectangleIcon },
 ];
 
 export default function Sidebar() {

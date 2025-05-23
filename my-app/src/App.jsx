@@ -2,7 +2,10 @@ import "./App.css";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/SideBar";
-import Dashboard from "./components/Hero";
+import Dashboard from "./components/Dashboard";
+import Home from "./Pages/Home";
+import Root from "./Routes/Routes";
+
 function App() {
   return (
     <>
@@ -10,7 +13,8 @@ function App() {
       {/* <Navbar></Navbar> */}
       {/* <Sidebar></Sidebar> */}
       {/* <FeaturesSection></FeaturesSection> */}
-      <Dashboard></Dashboard>
+      {/* <Home></Home> */}
+      <Root></Root>
     </>
   );
 }
