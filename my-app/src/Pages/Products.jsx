@@ -178,10 +178,10 @@ export default function Products() {
           pageCount={pageCount}
           previousLabel="←"
           containerClassName="flex justify-center mt-4 space-x-2"
-          pageClassName="px-3 py-1 border rounded hover:bg-blue-200"
+          pageClassName="px-3 py-1 border rounded hover:bg-blue-200 cursor-pointer"
           activeClassName="bg-blue-500 text-white"
-          previousClassName="px-3 py-1 border rounded"
-          nextClassName="px-3 py-1 border rounded"
+          previousClassName="px-3 py-1 border rounded cursor-pointer"
+          nextClassName="px-3 py-1 border rounded cursor-pointer"
           disabledClassName="opacity-50 cursor-not-allowed"
         />
       </div>
