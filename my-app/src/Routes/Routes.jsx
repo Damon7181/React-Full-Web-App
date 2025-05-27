@@ -16,7 +16,7 @@ export default function Root() {
           <Route path="/Products" element={<Products />} />
           <Route path="/Categories" element={<Categories />} />
           <Route path="/Brands" element={<Brands />} />
-          <Route path="/FormForProduct" element={<FormForProduct />} />
+          <Route path="/FormForProduct" element={<FormForProduct />} />          
         </Route>
         <Route path="/Login" element={<Login />} />
       </Routes>

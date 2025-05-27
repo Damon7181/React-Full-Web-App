@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import {
   MagnifyingGlassIcon,
@@ -11,6 +12,7 @@ import {
 export default function Products() {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
+  const navigate = useNavigate();
   const itemsPerPage = 5;
 
   useEffect(() => {
@@ -26,6 +28,23 @@ export default function Products() {
 
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
+  };
+
+  const handleDelete = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this product?"))
+      return;
+    try {
+      await axios.delete(`http://localhost:5000/api/products/${id}`);
+      setProducts((prev) => prev.filter((product) => product._id !== id));
+      alert("Product deleted successfully.");
+    } catch (error) {
+      console.error("Error deleting product:", error);
+      alert("Failed to delete product.");
+    }
+  };
+
+  const handleEdit = (product) => {
+    navigate("/FormForProduct", { state: { product } });
   };
 
   return (
@@ -129,13 +148,19 @@ export default function Products() {
                   </p>
                 </td>
                 <td className="px-4 py-8 flex space-x-3 text-grey">
-                  <button className="hover:text-blue-600">
+                  <button className="hover:text-blue-600 hover:bg-blue-200 p-1 rounded">
                     <EyeIcon className="h-5 w-5" />
                   </button>
-                  <button className="hover:text-green-600">
+                  <button
+                    onClick={() => handleEdit(product)}
+                    className="hover:text-green-600 hover:bg-green-200 p-1 rounded"
+                  >
                     <PencilIcon className="h-5 w-5" />
                   </button>
-                  <button className="hover:text-red-600">
+                  <button
+                    onClick={() => handleDelete(product._id)}
+                    className="hover:text-red-600 hover:bg-red-200 p-1 rounded"
+                  >
                     <TrashIcon className="h-5 w-5" />
                   </button>
                 </td>

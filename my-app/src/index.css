@@ -3,7 +3,7 @@
 /* Login */
 @layer {
   .shadow-all {
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   }
 }
 
@@ -20,4 +20,15 @@
   color: black;
   font-size: small;
   font-weight: 500;
+}
+.shadow-all1 {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+.shadow-all1:hover {
+  transform: scale(1.05) translateY(-2px);
+  /* transform: scale(1.05) translatex(-2px); */
+  transition: transform 0.3s ease;
+}
+.shadow-icon {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }

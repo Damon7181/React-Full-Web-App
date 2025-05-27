@@ -1,7 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function FormForProduct() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const editingProduct = location.state?.product;
+
   const [formData, setFormData] = useState({
     name: "",
     image: "",
@@ -11,10 +16,16 @@ export default function FormForProduct() {
     views: 0,
   });
 
+  useEffect(() => {
+    if (editingProduct) {
+      setFormData(editingProduct);
+    }
+  }, [editingProduct]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
-      ...prev,
+      ...prev, //this line add the previous fields with this form
       [name]: name === "views" ? Number(value) : value,
     }));
   };
@@ -22,21 +33,18 @@ export default function FormForProduct() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        "http://localhost:5000/api/products",
-        formData
-      );
-      alert("Product added successfully!");
-      console.log("Saved Product:", res.data);
-      // Optionally reset form
-      setFormData({
-        name: "",
-        image: "",
-        price: "",
-        originalPrice: "",
-        status: "",
-        views: 0,
-      });
+      if (editingProduct) {
+        await axios.put(
+          `http://localhost:5000/api/products/${editingProduct._id}`,
+          formData
+        );
+        alert("Product updated successfully!");
+      } else {
+        await axios.post("http://localhost:5000/api/products", formData);
+        alert("Product added successfully!");
+      }
+      //take you back to the products Dashboard
+      navigate("/Products");
     } catch (err) {
       console.error("Error saving product:", err);
       alert("Failed to save product.");
@@ -45,9 +53,10 @@ export default function FormForProduct() {
 
   return (
     <div className="mx-auto mt-10 p-10 rounded-2xl shadow-md bg-white max-w-xl">
-      <h2 className="text-2xl font-bold mb-6 text-gray-800">Add New Product</h2>
+      <h2 className="text-2xl font-bold mb-6 text-gray-800">
+        {editingProduct ? "Edit Product" : "Add New Product"}
+      </h2>
       <form onSubmit={handleSubmit} className="space-y-5">
-        {/* All your input fields here — no change needed */}
         <input
           type="text"
           name="name"
@@ -82,6 +91,7 @@ export default function FormForProduct() {
           onChange={handleChange}
           placeholder="Original Price"
           className="w-full border border-gray-300 rounded-lg px-4 py-2"
+          required
         />
         <input
           type="text"
@@ -90,6 +100,7 @@ export default function FormForProduct() {
           onChange={handleChange}
           placeholder="Status"
           className="w-full border border-gray-300 rounded-lg px-4 py-2"
+          required
         />
         <input
           type="number"
@@ -99,13 +110,14 @@ export default function FormForProduct() {
           placeholder="Views"
           className="w-full border border-gray-300 rounded-lg px-4 py-2"
           min="0"
+          required
         />
 
         <button
           type="submit"
           className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700"
         >
-          Submit
+          {editingProduct ? "Update Product" : "Submit"}
         </button>
       </form>
     </div>

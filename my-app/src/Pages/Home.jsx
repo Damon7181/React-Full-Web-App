@@ -28,7 +28,7 @@ const Home = () => {
   ];
 
   return (
-    <section className=" text-gray-600 body-font w-full">
+    <section className=" text-gray-600 w-full">
       <div className="container px-5 mx-auto w-full">
         <div>
           <h1 className="text-4xl text-zinc-950 font-bold">
