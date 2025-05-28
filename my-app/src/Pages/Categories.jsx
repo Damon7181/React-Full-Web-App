@@ -2,6 +2,7 @@ import { TrashIcon, PencilIcon } from "@heroicons/react/24/outline";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export default function Categories() {
   const [categories, setCategories] = useState([]);
@@ -15,19 +16,28 @@ export default function Categories() {
   }, []);
 
   const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this Category?"))
-      return;
-    try {
-      await axios.delete(`http://localhost:5000/api/categories/${id}`);
-      setCategories((categories) =>
-        categories.filter((category) => category._id !== id)
-      );
-      alert("Category deleted successfully.");
-    } catch (error) {
-      console.error("Error deleting category:", error);
-      alert("Failed to delete category.");
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "This category will be permanently deleted!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    });
+
+    if (result.isConfirmed) {
+      try {
+        await axios.delete(`http://localhost:5000/api/categories/${id}`);
+        setCategories((prev) => prev.filter((category) => category._id !== id));
+        Swal.fire("Deleted!", "Category has been deleted.", "success");
+      } catch (error) {
+        console.error("Error deleting category:", error);
+        Swal.fire("Error!", "Failed to delete category.", "error");
+      }
     }
   };
+
   const handleEdit = (category) => {
     navigate("/FormForCategory", { state: { category } });
   };
@@ -52,7 +62,7 @@ export default function Categories() {
           <div className="flex flex-wrap mt-5">
             {categories.map((category, index) => (
               <div key={index} className="xl:w-1/3 md:w-1/2 p-4">
-                <div className="relative shadow-all1 p-6 rounded-2xl hover:shadow shadow-blue-500  flex flex-col items-center text-center">
+                <div className="relative shadow-all1 p-6 rounded-2xl hover:shadow shadow-blue-500  flex flex-col items-center">
                   <div className="absolute top-2 right-2 flex gap-2">
                     <button
                       onClick={() => handleEdit(category)}

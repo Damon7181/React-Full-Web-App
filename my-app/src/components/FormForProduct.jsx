@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function FormForProduct() {
   const location = useLocation();
@@ -38,16 +40,16 @@ export default function FormForProduct() {
           `http://localhost:5000/api/products/${editingProduct._id}`,
           formData
         );
-        alert("Product updated successfully!");
+        toast.success("Product updated successfully!");
       } else {
         await axios.post("http://localhost:5000/api/products", formData);
-        alert("Product added successfully!");
+        toast.success("Product added successfully!");
       }
       //take you back to the products Dashboard
       navigate("/Products");
     } catch (err) {
       console.error("Error saving product:", err);
-      alert("Failed to save product.");
+      toast.error("Failed to save product.");
     }
   };
 
@@ -120,6 +122,7 @@ export default function FormForProduct() {
           {editingProduct ? "Update Product" : "Submit"}
         </button>
       </form>
+      
     </div>
   );
 }

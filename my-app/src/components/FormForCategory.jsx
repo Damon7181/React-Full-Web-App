@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function FormForCategory() {
   const location = useLocation();
@@ -35,15 +37,15 @@ export default function FormForCategory() {
           `http://localhost:5000/api/categories/${editingCategory._id}`,
           formData
         );
-        alert("Category updated successfully!");
+        toast.success("Category updated successfully!");
       } else {
         await axios.post("http://localhost:5000/api/categories", formData);
-        alert("Category added successfully!");
+        toast.success("Category added successfully!");
       }
       navigate("/Categories");
     } catch (err) {
       console.error("Error saving category:", err);
-      alert("Failed to save category.");
+      toast.error("Failed to save category.");
     }
   };
 

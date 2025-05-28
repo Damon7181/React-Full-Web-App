@@ -32,25 +32,15 @@ export default function Products() {
   };
 
   const handleDelete = async (id) => {
-    const result = await Swal.fire({
-      title: "Are you sure?",
-      text: "You won’t be able to undo this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    });
-
-    if (result.isConfirmed) {
-      try {
-        await axios.delete(`http://localhost:5000/api/products/${id}`);
-        setProducts((prev) => prev.filter((product) => product._id !== id));
-        Swal.fire("Deleted!", "Product has been deleted.", "success");
-      } catch (error) {
-        console.error("Error deleting product:", error);
-        Swal.fire("Error!", "Failed to delete product.", "error");
-      }
+    if (!window.confirm("Are you sure you want to delete this product?"))
+      return;
+    try {
+      await axios.delete(`http://localhost:5000/api/products/${id}`);
+      setProducts((prev) => prev.filter((product) => product._id !== id));
+      alert("Product deleted successfully.");
+    } catch (error) {
+      console.error("Error deleting product:", error);
+      alert("Failed to delete product.");
     }
   };
 
