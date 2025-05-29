@@ -7,6 +7,7 @@ import Categories from "../Pages/Categories";
 import Brands from "../Pages/Brands";
 import FormForProduct from "../components/FormForProduct";
 import FormForCategory from "../components/FormForCategory";
+import Register from "../components/Register";
 
 export default function Root() {
   return (
@@ -21,6 +22,7 @@ export default function Root() {
           <Route path="/FormForCategory" element={<FormForCategory />} />
         </Route>
         <Route path="/Login" element={<Login />} />
+        <Route path="/Register" element={<Register />} />
       </Routes>
     </Router>
   );

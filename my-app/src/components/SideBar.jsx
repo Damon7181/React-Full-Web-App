@@ -28,12 +28,23 @@ export default function Sidebar() {
       >
         <div className="flex items-center justify-between p-4 relative">
           <h1
-            className={`text-3xl font-bold border-b-3 border-b-blue-800 ${
-              collapsed ? "opacity-0" : "opacity-100"
+            className={`text-xl font-bold  ${
+              collapsed ? "opacity-0 , h-8  " : "opacity-100"
             }`}
           >
-            <span className="text-blue-400 font-serif ">J</span>inn
-            <span className="text-blue-400 font-serif">B</span>yte
+            <span className="text-blue-400 font-serif border-b-3 border-b-blue-800">
+              J
+            </span>
+            <span className="text-blue-400 font-serif border-b-3 border-b-blue-800">
+              B
+            </span>{" "}
+            e
+            <span className="text-red-400 font-thin border-b-3 border-b-red-800">
+              S{" "}
+              <span className="text-white border-b-3 border-b-blue-800 ">
+                hop🛒
+              </span>
+            </span>
           </h1>
           <button
             onClick={() => setCollapsed(!collapsed)}

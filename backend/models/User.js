@@ -1,9 +1,8 @@
 const mongoose = require("mongoose");
 
-const CategorySchema = new mongoose.Schema({
-  name: String,
-  description: String,
-  image: String,
+const userSchema = new mongoose.Schema({
+  email: { type: String, required: true },
+  password: { type: String, required: true }, // hashed password
 });
 
-module.exports = mongoose.model("Category", CategorySchema);
+module.exports = mongoose.model("User", userSchema);
