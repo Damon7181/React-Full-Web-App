@@ -7,7 +7,6 @@ import {
   TagIcon,
   ArrowRightStartOnRectangleIcon,
 } from "@heroicons/react/24/outline";
-import Example from "./Navbar";
 const navigation = [
   { name: "Dashboard", href: "/", icon: Squares2X2Icon },
   { name: "Products", href: "/Products", icon: CubeIcon },
@@ -35,13 +34,21 @@ export default function Sidebar() {
             <span className="text-blue-400 font-serif border-b-3 border-b-blue-800">
               J
             </span>
-            <span className="text-blue-400 font-serif border-b-3 border-b-blue-800">
+            <span className="text-blue-400 font-serif border-b-3 border-b-blue-800 ">
               B
             </span>{" "}
             e
-            <span className="text-red-400 font-thin border-b-3 border-b-red-800">
+            <span
+              className={`text-red-400 font-thin border-b-3 border-b-red-800 ${
+                collapsed ? "hidden" : "opacity-100"
+              }`}
+            >
               S{" "}
-              <span className="text-white border-b-3 border-b-blue-800 ">
+              <span
+                className={`text-white border-b-3 border-b-blue-800 ${
+                  collapsed ? "hidden" : "opacity-100"
+                }`}
+              >
                 hop🛒
               </span>
             </span>
@@ -59,7 +66,7 @@ export default function Sidebar() {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="size-6 hover:text-blue-400"
+                className="size-6 hover:text-blue-400 cursor-pointer"
               >
                 <path
                   strokeLinecap="round"
@@ -74,7 +81,7 @@ export default function Sidebar() {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="size-6 hover:text-blue-400"
+                className="size-6 hover:text-blue-400 cursor-pointer"
               >
                 <path
                   strokeLinecap="round"

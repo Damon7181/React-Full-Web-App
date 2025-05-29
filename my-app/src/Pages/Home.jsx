@@ -1,29 +1,38 @@
 import Barchart from "../components/Barchart";
 import Linechart from "../components/Linechart";
 const Home = () => {
-  const features = [
+  const stats = [
     {
-      title: "Shooting Stars",
-      icon: <path d="M22 12h-4l-3 9L9 3l-3 9H2" />,
+      title: "Total Sales",
+      value: "$24,350",
+      icon: <path d="M12 1v22M17 5H9a3 3 0 0 0 0 6h6a3 3 0 0 1 0 6H6" />,
+      iconColor: "text-blue-600",
+      bgColor: "bg-blue-100",
     },
     {
-      title: "The Catalyzer",
+      title: "Orders Placed",
+      value: "325 Orders",
       icon: (
         <>
-          <circle cx="6" cy="6" r="3" />
-          <circle cx="6" cy="18" r="3" />
-          <path d="M20 4L8.12 15.88M14.47 14.48L20 20M8.12 8.12L12 12" />
+          <path d="M3 3h18v4H3z" />
+          <path d="M6 7v13h12V7" />
+          <path d="M9 10h6" />
         </>
       ),
+      iconColor: "text-green-600",
+      bgColor: "bg-green-100",
     },
     {
-      title: "Neptune",
+      title: "Customers",
+      value: "150 Users",
       icon: (
         <>
-          <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
           <circle cx="12" cy="7" r="4" />
+          <path d="M5.5 21a6.5 6.5 0 0 1 13 0" />
         </>
       ),
+      iconColor: "text-purple-600",
+      bgColor: "bg-purple-100",
     },
   ];
 
@@ -42,35 +51,37 @@ const Home = () => {
             of your store's activity.
           </p>
         </div>
-        <div className="flex flex-wrap ">
-          {features.map((feature, index) => (
-            <div key={index} className="xl:w-1/3 md:w-1/2 p-4 ">
-              <div className=" border border-gray-400 p-6 rounded-lg hover:shadow shadow-blue-500 group">
-                <div className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4 group-hover:bg-blue-900 group-hover:text-amber-50">
-                  <svg
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    className="w-6 h-6"
-                    viewBox="0 0 24 24"
-                  >
-                    {feature.icon}
-                  </svg>
-                </div>
-                <h2 className="text-lg text-gray-900 font-medium title-font mb-2 group-hover:text-blue-900">
-                  {feature.title}
-                </h2>
-                <p className="leading-relaxed text-base group-hover:text-blue-950">
-                  Fingerstache flexitarian street art 8-bit waist co, subway
-                  tile poke farm.
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+          {stats.map((stat, index) => (
+            <div
+              key={index}
+              className="flex items-center p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-lg transition-shadow duration-300"
+            >
+              <div
+                className={`w-14 h-14 flex items-center justify-center rounded-full ${stat.bgColor} ${stat.iconColor} mr-4`}
+              >
+                <svg
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="w-7 h-7"
+                  viewBox="0 0 24 24"
+                >
+                  {stat.icon}
+                </svg>
+              </div>
+              <div>
+                <p className="text-gray-500 text-sm">{stat.title}</p>
+                <p className="text-xl font-semibold text-gray-900">
+                  {stat.value}
                 </p>
               </div>
             </div>
           ))}
         </div>
-        <div className="grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-16 mt-6 px-5">
+        <div className="grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-16 mt-6 px-1">
           <div className="bg-white p-4 shadow-[-4px_0_2px_rgba(0,0,0,0.1)] rounded">
             <Barchart />
           </div>

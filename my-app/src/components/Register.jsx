@@ -1,127 +1,68 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { useLocation, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
-export default function Register() {
-  const location = useLocation();
+const Register = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const editingProduct = location.state?.product;
 
-  const [formData, setFormData] = useState({
-    name: "",
-    image: "",
-    price: "",
-    originalPrice: "",
-    status: "",
-    views: 0,
-  });
-
-  useEffect(() => {
-    if (editingProduct) {
-      setFormData(editingProduct);
-    }
-  }, [editingProduct]);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev, //this line add the previous fields with this form
-      [name]: name === "views" ? Number(value) : value,
-    }));
-  };
-
-  const handleSubmit = async (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      if (editingProduct) {
-        await axios.put(
-          `http://localhost:5000/api/products/${editingProduct._id}`,
-          formData
-        );
-        toast.success("Product updated successfully!");
-      } else {
-        await axios.post("http://localhost:5000/api/products", formData);
-        toast.success("Product added successfully!");
-      }
-      //take you back to the products Dashboard
-      navigate("/Login");
+      const res = await axios.post("http://localhost:5000/api/auth/register", {
+        name,
+        email,
+        password,
+      });
+
+      localStorage.setItem("token", res.data.token);
+      toast.success("Registration successful!");
+      navigate("/"); // Redirect to homepage
     } catch (err) {
-      console.error("Error saving product:", err);
-      toast.error("Failed to save product.");
+      toast.error(err.response?.data?.message || "Registration failed");
     }
   };
 
   return (
-    <div className="mx-auto mt-10 p-10 rounded-2xl shadow-md bg-white max-w-xl">
-      <h2 className="text-2xl font-bold mb-6 text-gray-800">
-        {editingProduct ? "Edit Product" : "Add New Product"}
-      </h2>
-      <form onSubmit={handleSubmit} className="space-y-5">
+    <div className="max-w-md mx-auto mt-10 p-4 border rounded shadow">
+      <h2 className="text-2xl font-bold mb-4">Create an Account</h2>
+      <form onSubmit={handleRegister} className="space-y-4">
         <input
           type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          placeholder="Product Name"
-          className="w-full border border-gray-300 rounded-lg px-4 py-2"
+          placeholder="Full Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="w-full px-3 py-2 border rounded"
           required
         />
         <input
-          type="text"
-          name="image"
-          value={formData.image}
-          onChange={handleChange}
-          placeholder="Image URL"
-          className="w-full border border-gray-300 rounded-lg px-4 py-2"
+          type="email"
+          placeholder="Email Address"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-full px-3 py-2 border rounded"
           required
         />
         <input
-          type="text"
-          name="price"
-          value={formData.price}
-          onChange={handleChange}
-          placeholder="Price"
-          className="w-full border border-gray-300 rounded-lg px-4 py-2"
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="w-full px-3 py-2 border rounded"
           required
         />
-        <input
-          type="text"
-          name="originalPrice"
-          value={formData.originalPrice}
-          onChange={handleChange}
-          placeholder="Original Price"
-          className="w-full border border-gray-300 rounded-lg px-4 py-2"
-          required
-        />
-        <input
-          type="text"
-          name="status"
-          value={formData.status}
-          onChange={handleChange}
-          placeholder="Status"
-          className="w-full border border-gray-300 rounded-lg px-4 py-2"
-          required
-        />
-        <input
-          type="number"
-          name="views"
-          value={formData.views}
-          onChange={handleChange}
-          placeholder="Views"
-          className="w-full border border-gray-300 rounded-lg px-4 py-2"
-          min="0"
-          required
-        />
-
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700"
+          className="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-500"
         >
-          {editingProduct ? "Update Product" : "Submit"}
+          Register
         </button>
       </form>
     </div>
   );
-}
+};
+
+export default Register;
