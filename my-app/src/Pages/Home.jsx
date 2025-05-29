@@ -1,7 +1,6 @@
 import Barchart from "../components/Barchart";
 import Linechart from "../components/Linechart";
 const Home = () => {
-  // ewkwejkwoek
   const stats = [
     {
       title: "Total Sales",
