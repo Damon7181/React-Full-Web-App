@@ -8,21 +8,32 @@ import Brands from "../Pages/Brands";
 import FormForProduct from "../components/FormForProduct";
 import FormForCategory from "../components/FormForCategory";
 import Register from "../components/Register";
+import PrivateRoute from "../components/PrivateRoute";
 
 export default function Root() {
   return (
     <Router>
       <Routes>
-        <Route element={<Dashboard />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/Products" element={<Products />} />
-          <Route path="/Categories" element={<Categories />} />
-          <Route path="/Brands" element={<Brands />} />
-          <Route path="/FormForProduct" element={<FormForProduct />} />
-          <Route path="/FormForCategory" element={<FormForCategory />} />
-        </Route>
+        {/* Public Routes */}
         <Route path="/Login" element={<Login />} />
         <Route path="/Register" element={<Register />} />
+
+        {/* Private Routes */}
+        <Route
+          path="/"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        >
+          <Route index element={<Home />} />
+          <Route path="Products" element={<Products />} />
+          <Route path="Categories" element={<Categories />} />
+          <Route path="Brands" element={<Brands />} />
+          <Route path="FormForProduct" element={<FormForProduct />} />
+          <Route path="FormForCategory" element={<FormForCategory />} />
+        </Route>
       </Routes>
     </Router>
   );

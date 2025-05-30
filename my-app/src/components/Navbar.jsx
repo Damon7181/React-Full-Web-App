@@ -8,6 +8,7 @@ import {
   MenuItems,
 } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { useNavigate } from "react-router-dom";
 
 const navigation = [
   { name: "Dashboard", href: "#", current: true },
@@ -21,11 +22,16 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/Login");
+  };
   return (
     <Disclosure as="nav" className=" bg-gray-800">
       <div className="mx-auto sm:px-6 md:px-8 lg:px-8">
         <div className="relative flex h-16 items-center justify-end">
-
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
             <button
               type="button"
@@ -70,12 +76,13 @@ export default function Navbar() {
                   </a>
                 </MenuItem> */}
                 <MenuItem>
-                  <a
-                    href="/login"
-                    className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
+                  <button
+                    // href="/login"
+                    onClick={handleLogout}
+                    className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden w-full text-start"
                   >
                     Sign out
-                  </a>
+                  </button>
                 </MenuItem>
               </MenuItems>
             </Menu>
