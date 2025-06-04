@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/Images/jinnbyte_logo.jpg";
 import { toast } from "react-toastify";
-import Register from "./Register"
+import Register from "./Register";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -20,7 +20,7 @@ const Login = () => {
 
       localStorage.setItem("token", res.data.token);
       toast.success("Login successful!");
-      navigate("/"); 
+      navigate("/");
     } catch (err) {
       toast.error(err.response?.data?.message || "Login failed");
     }
@@ -32,7 +32,7 @@ const Login = () => {
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img alt="Your Company" src={logo} className="mx-auto h-15 w-20" />
           <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
-            Sign in to your Account
+            Sign in to your Account {email}
           </h2>
         </div>
 
