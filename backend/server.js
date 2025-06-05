@@ -18,12 +18,15 @@ mongoose
 const productRoutes = require("./routes/productRoutes.js");
 const categoryRoutes = require("./routes/categoryRoutes.js");
 const authRoutes = require("./routes/auth.js");
-const dashboardRoutes = require("./routes/dashboard");
+const dashboardRoutes = require("./routes/dashboard.js");
+const orderRoutes = require("./routes/orderRoutes.js");
 
 app.use("/api/products", productRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/orders", orderRoutes);
+
 
 const PORT = 5000;
 app.listen(PORT, () => {
