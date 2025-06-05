@@ -12,7 +12,7 @@ const navigation = [
   { name: "Dashboard", href: "/", icon: Squares2X2Icon },
   { name: "Products", href: "/Products", icon: CubeIcon },
   { name: "Categories", href: "/Categories", icon: FolderIcon },
-  { name: "Brands", href: "/Brands", icon: TagIcon },
+  { name: "Orders", href: "/Orders", icon: TagIcon },
 ];
 
 export default function Sidebar() {
