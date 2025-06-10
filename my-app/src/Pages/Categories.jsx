@@ -44,12 +44,13 @@ export default function Categories() {
 
   return (
     <>
-      <section className="text-gray-600 w-full">
+      <section className="text-gray-600 w-full bg-blue-50 rounded-2xl">
         <div className="container px-5 mx-auto w-full">
           <div>
-            <h1 className="text-4xl text-zinc-950 font-bold underline">
+            <h1 className="text-2xl text-zinc-950 font-bold mt-5">
               Categories Management
             </h1>
+            <p className="text-grey">Showing Products</p>
           </div>
           <div className="button-div flex justify-end items-end">
             <a
@@ -59,10 +60,10 @@ export default function Categories() {
               + Add Category
             </a>
           </div>
-          <div className="flex flex-wrap mt-5">
+          <div className="flex flex-wrap mt-5 ">
             {categories.map((category, index) => (
-              <div key={index} className="xl:w-1/3 md:w-1/2 p-4">
-                <div className="relative shadow-all1 p-6 rounded-2xl hover:shadow shadow-blue-500  flex flex-col items-center">
+              <div key={index} className="xl:w-1/3 md:w-1/2 p-4 ">
+                <div className="relative shadow-all1 p-6 rounded-2xl hover:shadow shadow-blue-500  flex flex-col items-center bg-white">
                   <div className="absolute top-2 right-2 flex gap-2">
                     <button
                       onClick={() => handleEdit(category)}

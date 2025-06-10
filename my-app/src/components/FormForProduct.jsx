@@ -12,6 +12,7 @@ export default function FormForProduct() {
   const [formData, setFormData] = useState({
     name: "",
     image: "",
+    url: "",
     price: "",
     originalPrice: "",
     status: "",
@@ -54,11 +55,11 @@ export default function FormForProduct() {
   };
 
   return (
-    <div className="mx-auto mt-10 p-10 rounded-2xl shadow-md bg-white max-w-xl">
+    <div className="mx-auto p-5 rounded-2xl shadow-md bg-white max-w-xl max-h-">
       <h2 className="text-2xl font-bold mb-6 text-gray-800">
         {editingProduct ? "Edit Product" : "Add New Product"}
       </h2>
-      <form onSubmit={handleSubmit} className="space-y-5">
+      <form onSubmit={handleSubmit} className="space-y-3">
         <input
           type="text"
           name="name"
@@ -79,6 +80,15 @@ export default function FormForProduct() {
         />
         <input
           type="text"
+          name="url"
+          value={formData.url}
+          onChange={handleChange}
+          placeholder="Website URL"
+          className="w-full border border-gray-300 rounded-lg px-4 py-2"
+          required
+        />
+        <input
+          type="text"
           name="price"
           value={formData.price}
           onChange={handleChange}
@@ -92,6 +102,33 @@ export default function FormForProduct() {
           value={formData.originalPrice}
           onChange={handleChange}
           placeholder="Original Price"
+          className="w-full border border-gray-300 rounded-lg px-4 py-2"
+          required
+        />
+        <input
+          type="text"
+          name="maxTemperature"
+          value={formData.maxTemperature}
+          onChange={handleChange}
+          placeholder="Maximum Temperature"
+          className="w-full border border-gray-300 rounded-lg px-4 py-2"
+          required
+        />
+        <input
+          type="text"
+          name="material"
+          value={formData.material}
+          onChange={handleChange}
+          placeholder="Material Used"
+          className="w-full border border-gray-300 rounded-lg px-4 py-2"
+          required
+        />
+        <input
+          type="text"
+          name="emfEmission"
+          value={formData.emfEmission}
+          onChange={handleChange}
+          placeholder="EMF Emission"
           className="w-full border border-gray-300 rounded-lg px-4 py-2"
           required
         />

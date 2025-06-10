@@ -11,8 +11,12 @@ import {
 } from "@heroicons/react/24/outline";
 
 export default function Products() {
+  //for products
   const [products, setProducts] = useState([]);
+  //for pagination
   const [currentPage, setCurrentPage] = useState(0);
+  //for search
+  const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
   const itemsPerPage = 5;
 
@@ -23,9 +27,14 @@ export default function Products() {
       .catch((error) => console.error("Error fetching products:", error));
   }, []);
 
-  const pageCount = Math.ceil(products.length / itemsPerPage);
+//for Search
+  const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const pageCount = Math.ceil(filteredProducts.length / itemsPerPage);
   const offset = currentPage * itemsPerPage;
-  const currentItems = products.slice(offset, offset + itemsPerPage);
+  const currentItems = filteredProducts.slice(offset, offset + itemsPerPage);
 
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
@@ -59,7 +68,7 @@ export default function Products() {
   };
 
   return (
-    <section className="flex flex-1 flex-col bg-zinc-100 rounded-2xl p-4">
+    <section className="flex flex-1 flex-col bg-blue-50 rounded-2xl p-4">
       <div className="heading">
         <h1 className="font-bold text-2xl">Product Mangement</h1>
         <p className="text-grey">Showing Products</p>
@@ -74,6 +83,11 @@ export default function Products() {
             type="search"
             placeholder="Search Products ..."
             className="text-grey border border-gray-400 rounded-xl h-8 w-full pl-10 focus:outline-none focus:border-3 focus:border-blue-900"
+            value={searchTerm}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setCurrentPage(0);
+            }}
           />
         </div>
 
@@ -93,6 +107,7 @@ export default function Products() {
         </a>
       </div>
 
+      {/* Table */}
       <div className="overflow-x-auto mt-6">
         <table className="min-w-full bg-white border border-gray-400 rounded-lg shadow-md">
           <thead className="bg-gray-200">
@@ -121,7 +136,7 @@ export default function Products() {
                       <p className="text-dark">{product.name}</p>
                       <a
                         className="text-xs text-blue-600 hover:underline cursor-pointer"
-                        href="#"
+                        href={product.url}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -151,7 +166,7 @@ export default function Products() {
                   </p>
                 </td>
                 <td className="px-2 py-4 text-sm">
-                  <span className="px-2 py-1 text-xs font-medium rounded-full bg-gray-300 text-grey">
+                  <span className="px-4 py-1 text-xs font-medium rounded-full bg-gray-300 text-grey">
                     {product.status ?? "No Review"}
                   </span>
                   <p className="px-4 py-1 text-xs text-gray-500 mt-1">
