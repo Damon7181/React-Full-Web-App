@@ -6,10 +6,10 @@ export default function Home() {
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         <Image
           className="dark:invert"
-          src="/next.svg"
+          src="https://jinnbyte.com/wp-content/uploads/2024/11/JB_logo-1-1.svg"
           alt="Next.js logo"
-          width={180}
-          height={38}
+          width={280}
+          height={138}
           priority
         />
         <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
