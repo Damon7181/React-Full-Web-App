@@ -2,11 +2,14 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useCart } from "../context/CartContext"; // 👈 Import cart context
 
 export default function SaunaPage() {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const { addToCart } = useCart(); // 👈 Access addToCart from context
 
   useEffect(() => {
     axios
@@ -22,7 +25,12 @@ export default function SaunaPage() {
       });
   }, []);
 
-  if (loading) return <div className="p-6">Loading...</div>;
+  if (loading)
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <p className="text-center">Loading...</p>
+      </div>
+    );
   if (error) return <div className="p-6 text-red-500">{error}</div>;
 
   return (
@@ -44,9 +52,21 @@ export default function SaunaPage() {
                 <h2 className="text-lg text-gray-900 font-medium title-font mb-2">
                   {category.name}
                 </h2>
-                <p className="leading-relaxed text-base text-center">
+                <p className="leading-relaxed text-base text-center mb-4">
                   {category.description}
                 </p>
+
+                <div className="flex gap-3 w-full justify-center">
+                  <button
+                    onClick={() => addToCart(category)} // 👈 Functional Add to Cart
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-xl transition"
+                  >
+                    Add to Cart
+                  </button>
+                  <button className="bg-green-500 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-xl transition">
+                    Buy Now
+                  </button>
+                </div>
               </div>
             </div>
           ))}
