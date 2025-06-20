@@ -1,11 +1,12 @@
 "use client";
-
 import Link from "next/link";
 import { ShoppingCart } from "lucide-react";
-import { useCart } from "../context/CartContext";
+// import { useCart } from "../context/CartContext";
+import { useSelector } from "react-redux";
 
 export default function Navbar() {
-  const { cartCount } = useCart();
+  // const { cartCount } = useCart();
+  const cartCount = useSelector((state) => state.cart.cartCount);
 
   return (
     <nav className="bg-blue-50 shadow-md py-4 px-6 flex justify-between items-center">
