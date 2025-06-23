@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "../store/cartSlice";
 
 export default function SaunaPage() {
-  const [categories, setCategories] = useState([]);
+  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -14,14 +14,14 @@ export default function SaunaPage() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/categories")
+      .get("http://localhost:5000/api/products")
       .then((res) => {
-        setCategories(res.data);
+        setProducts(res.data);
         setLoading(false);
       })
       .catch((err) => {
-        console.error("Error fetching categories:", err);
-        setError("Failed to fetch categories");
+        console.error("Error fetching products:", err);
+        setError("Failed to fetch products");
         setLoading(false);
       });
   }, []);
@@ -32,6 +32,7 @@ export default function SaunaPage() {
         <p className="text-center">Loading...</p>
       </div>
     );
+
   if (error) return <div className="p-6 text-red-500">{error}</div>;
 
   return (
@@ -42,23 +43,32 @@ export default function SaunaPage() {
         </h1>
 
         <div className="flex flex-wrap mt-5">
-          {categories.map((category, index) => (
+          {products.map((product, index) => (
             <div key={index} className="xl:w-1/3 md:w-1/2 p-4">
               <div className="relative shadow-all1 p-6 rounded-2xl hover:shadow shadow-blue-500 flex flex-col items-center bg-white">
                 <img
-                  src={category.image}
-                  alt={category.name}
+                  src={product.image}
+                  alt={product.name}
                   className="w-32 h-32 mb-4 rounded-full object-cover"
                 />
                 <h2 className="text-lg text-gray-900 font-medium title-font mb-2">
-                  {category.name}
+                  {product.name}
                 </h2>
-                <p className="leading-relaxed text-base text-center mb-4">
-                  {category.description}
+                <p className="leading-relaxed text-base text-center mb-2">
+                  ${product.price}
                 </p>
+
                 <div className="flex gap-3 w-full justify-center">
                   <button
-                    onClick={() => dispatch(addToCart())}
+                    onClick={() =>
+                      dispatch(
+                        addToCart({
+                          id: product._id,
+                          title: product.name,
+                          price: parseFloat(product.price),
+                        })
+                      )
+                    }
                     className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-xl transition"
                   >
                     Add to Cart
