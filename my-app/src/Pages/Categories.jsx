@@ -44,7 +44,7 @@ export default function Categories() {
 
   return (
     <>
-      <section className="text-gray-600 w-full bg-blue-50 rounded-2xl">
+      <section className="text-gray-600 w-full min-h-200 bg-blue-50 rounded-2xl">
         <div className="container px-5 mx-auto w-full">
           <div>
             <h1 className="text-2xl text-zinc-950 font-bold mt-5">

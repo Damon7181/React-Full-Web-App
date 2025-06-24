@@ -45,7 +45,7 @@ const Orders = () => {
             value={searchTerm}
             onChange={(e) => {
               setSearchTerm(e.target.value);
-              setCurrentPage(0);
+              // setCurrentPage(0);
             }}
           />
         </div>
