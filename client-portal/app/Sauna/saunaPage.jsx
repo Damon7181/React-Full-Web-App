@@ -4,11 +4,13 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../store/cartSlice";
+import { useRouter } from "next/navigation";
 
 export default function SaunaPage() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const router = useRouter();
 
   const dispatch = useDispatch();
 
@@ -73,7 +75,19 @@ export default function SaunaPage() {
                   >
                     Add to Cart
                   </button>
-                  <button className="bg-green-500 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-xl transition">
+                  <button
+                    onClick={() => {
+                      dispatch(
+                        addToCart({
+                          id: product._id,
+                          title: product.name,
+                          price: parseFloat(product.price),
+                        })
+                      );
+                      router.push("/checkout");
+                    }}
+                    className="bg-green-500 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-xl transition"
+                  >
                     Buy Now
                   </button>
                 </div>
