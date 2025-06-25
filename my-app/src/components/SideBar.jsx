@@ -30,7 +30,6 @@ export default function Sidebar() {
         collapsed ? "w-20" : "w-64"
       }`}
     >
-      {/* Header */}
       <div className="flex items-center justify-between p-4 relative">
         <h1
           className={`text-xl font-bold ${
@@ -61,7 +60,7 @@ export default function Sidebar() {
         </h1>
         <button
           onClick={() => setCollapsed(!collapsed)}
-          className={`text-gray-400 hover:text-white ${
+          className={` text-gray-400 hover:text-white ${
             collapsed ? "absolute left-auto ml-2" : ""
           }`}
         >

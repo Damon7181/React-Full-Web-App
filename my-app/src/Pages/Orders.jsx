@@ -1,10 +1,16 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { useNavigate } from "react-router-dom";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
+
+  const handleViewOrder = (order) => {
+    navigate("/orderDetails", { state: { order } });
+  };
 
   useEffect(() => {
     axios
@@ -52,12 +58,13 @@ const Orders = () => {
           {filteredOrders.map((order, index) => (
             <div
               key={index}
-              className="bg-white p-6 rounded-xl shadow-md border border-gray-200 flex flex-col justify-between"
+              onClick={() => handleViewOrder(order)}
+              className="cursor-pointer bg-white p-6 rounded-xl shadow-md border border-gray-200 flex flex-col justify-between hover:shadow-lg transition"
             >
               <div>
                 <div className="mb-4">
                   <h2 className="text-lg font-semibold mb-1">
-                    Order #{index + 1}
+                    Recent Order #{index + 1}
                     {/* Orderid: {order._id} */}
                   </h2>
                   <p className="text-sm text-gray-500">

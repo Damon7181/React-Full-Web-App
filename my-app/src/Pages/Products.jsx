@@ -27,7 +27,7 @@ export default function Products() {
       .catch((error) => console.error("Error fetching products:", error));
   }, []);
 
-//for Search
+  //for Search
   const filteredProducts = products.filter((product) =>
     product.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -65,6 +65,9 @@ export default function Products() {
 
   const handleEdit = (product) => {
     navigate("/FormForProduct", { state: { product } });
+  };
+  const handleView = (product) => {
+    navigate("/productDetails", { state: { product } });
   };
 
   return (
@@ -174,9 +177,13 @@ export default function Products() {
                   </p>
                 </td>
                 <td className="px-4 py-8 flex space-x-3 text-grey">
-                  <button className="hover:text-blue-600 hover:bg-blue-200 p-1 rounded">
+                  <button
+                    onClick={() => handleView(product)}
+                    className="hover:text-blue-600 hover:bg-blue-200 p-1 rounded"
+                  >
                     <EyeIcon className="h-5 w-5" />
                   </button>
+
                   <button
                     onClick={() => handleEdit(product)}
                     className="hover:text-green-600 hover:bg-green-200 p-1 rounded"

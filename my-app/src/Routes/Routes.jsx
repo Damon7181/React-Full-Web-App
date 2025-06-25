@@ -9,6 +9,8 @@ import FormForCategory from "../components/FormForCategory";
 import Register from "../components/Register";
 import PrivateRoute from "../components/PrivateRoute";
 import Orders from "../Pages/Orders";
+import ProductDetails from "../components/ProductDetails";
+import OrderDetails from "../components/OrderDetails";
 
 export default function Root() {
   return (
@@ -33,6 +35,9 @@ export default function Root() {
           <Route path="Orders" element={<Orders />} />
           <Route path="FormForProduct" element={<FormForProduct />} />
           <Route path="FormForCategory" element={<FormForCategory />} />
+          <Route path="ProductDetails" element={<ProductDetails />} />
+
+          <Route path="/orderDetails" element={<OrderDetails />} />
         </Route>
       </Routes>
     </Router>
