@@ -17,7 +17,7 @@ export default function Navbar() {
   const [showCart, setShowCart] = useState(false);
 
   return (
-    <nav className="bg-blue-50 shadow-md py-4 px-6 flex justify-between items-center relative">
+    <nav className="bg-blue-50 shadow-md py-4 px-6 flex justify-between items-center relative  container mx-auto">
       <div>
         <h1 className="text-xl font-bold">
           <span className="text-blue-400 font-serif border-b-3 border-b-blue-800">

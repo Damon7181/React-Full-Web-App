@@ -1,4 +1,4 @@
-import SaunaPage from "./saunaPage"; // moved actual component to a new file
+import SaunaPage from "./saunaPage";
 import SaunaWrapper from "./Wrapper";
 
 export default function Page() {
