@@ -1,4 +1,3 @@
-// routes/orderRoutes.js
 const express = require("express");
 const Order = require("../models/Order.js");
 
@@ -16,9 +15,29 @@ router.get("/", async (req, res) => {
 
 // POST new order
 router.post("/", async (req, res) => {
-  const { products, totalAmount } = req.body;
+  const {
+    customerName,
+    customerEmail,
+    deliveryAddress,
+    products,
+    totalAmount,
+  } = req.body;
+
+  // Basic validation
+  if (
+    !customerName ||
+    !customerEmail ||
+    !deliveryAddress ||
+    !products ||
+    !totalAmount
+  ) {
+    return res.status(400).json({ message: "All fields are required" });
+  }
 
   const newOrder = new Order({
+    customerName,
+    customerEmail,
+    deliveryAddress,
     products,
     totalAmount,
   });
