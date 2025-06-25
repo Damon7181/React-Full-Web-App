@@ -1,9 +1,8 @@
 "use client";
-import NavbarComponent from "./navbar";
-import FooterComponent from "./footer";
+import NavbarComponent from "../components/navbar";
+import FooterComponent from "../components/footer";
 import { Provider } from "react-redux";
 import store from "../store";
-import Layout from "./layout";
 
 export default function SaunaWrapper({ children }) {
   return (
@@ -11,8 +10,7 @@ export default function SaunaWrapper({ children }) {
       <header>
         <NavbarComponent />
       </header>
-
-      <Layout>{children}</Layout>
+      <main>{children}</main>
       <footer>
         <FooterComponent />
       </footer>
